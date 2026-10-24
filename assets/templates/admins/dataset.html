@@ -1,0 +1,121 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+<div class="dataset-container">
+    <h2 class="title">View Trained Dataset</h2>
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    {% for column in d.columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in d.values %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f8fb;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dataset-container {
+        max-width: 90%;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 15px;
+    }
+
+    .styled-table th, .styled-table td {
+        border: 1px solid #d1e3f8;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .styled-table th {
+        background-color: #3498db;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .styled-table tbody tr {
+        background-color: #f9fbfd;
+        transition: background-color 0.3s ease;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #ecf5fc;
+    }
+
+    @media screen and (max-width: 768px) {
+        .styled-table, .styled-table thead, .styled-table tbody, .styled-table th, .styled-table td, .styled-table tr {
+            display: block;
+        }
+
+        .styled-table thead {
+            display: none;
+        }
+
+        .styled-table tr {
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        .styled-table td {
+            text-align: right;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        .styled-table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            width: 45%;
+            padding-left: 10px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+</style>
+{% endblock %}

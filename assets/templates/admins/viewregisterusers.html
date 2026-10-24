@@ -1,0 +1,80 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+<!-- User Table Section -->
+<section class="service_section layout_padding" style="background: #f0f4f8; padding: 60px 0;">
+    <div class="container">
+        <!-- Heading -->
+        <div class="heading_container text-center mb-5">
+            <h2 class="display-5 fw-bold text-white py-3 px-4 rounded" style="background-color: #0f5984;">
+                Construction Cost Index Prediction<br><small class="fs-5 text-light fw-light">Based on Machine
+                    Learning</small>
+            </h2>
+        </div>
+
+        <!-- Table Title -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">Registered Users</h2>
+            <p class="text-muted">Manage users, view their details, and perform actions like activation or blocking.</p>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover shadow-sm bg-white rounded">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Login ID</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Locality</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr class="text-center align-middle">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.loginid }}</td>
+                        <td>{{ i.mobile }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.locality }}</td>
+                        <td>
+                                {% if i.status == 'waiting' %}
+                                    <span class="badge bg-warning text-dark px-3 py-2">Waiting</span>
+                                {% elif i.status == 'activated' %}
+                                    <span class="badge bg-success px-3 py-2">Activated</span>
+                                {% else %}
+                                    <span class="badge bg-secondary px-3 py-2">Blocked</span>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if i.status == 'waiting' %}
+                                <a href="/ActivaUsers/?uid={{ i.id }}" class="btn btn-sm btn-outline-success me-2">Activate</a>
+                                <a href="/DeleteUsers/?uid={{ i.id }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            {% elif i.status == 'activated' %}
+                                <span class="text-success fw-bold">Activated</span>
+                                <a href="/BlockUsers/?uid={{ i.id }}" class="btn btn-sm btn-outline-warning ms-2">Block</a>
+                            {% else %}
+                                <span class="text-muted">No actions available</span>
+                            {% endif %}
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Optional FontAwesome (if you want icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-K5G+y7bG2FrlFXRShVcF+8Bl4gRCwx6+iYi1B6jRTs0s7WqQ+kZMG5KhcrxRAFtWAXOcNnb2HbeXQZ4V2gWjKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'users/userbase.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Dataset Preview</h2>
+    <div class="table-responsive mt-4">
+        {{ dataset_html|safe }}
+    </div>
+    <p class="mt-3">This is a preview of the first 5 rows of the dataset.</p>
+</div>
+{% endblock %}

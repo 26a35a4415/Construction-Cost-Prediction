@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block contents %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+<section class="registration-section py-5" style="background: #eef2f7;">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <div class="card registration-card border-0 shadow-lg animate__animated animate__fadeIn" data-aos="zoom-in">
+                    <div class="card-header bg-gradient text-white text-center py-4 rounded-top-4">
+                        <h2 class="mb-1"><i class="fas fa-user-plus me-2"></i>     Create Account</h2>
+                        <p class="mb-0 small opacity-75">Start your journey with Construction Cost Prediction</p>
+                    </div>
+
+                    <div class="card-body p-5 bg-white">
+                        <form action="{% url 'UserRegisterActions' %}" method="POST" class="needs-validation"
+                            novalidate>
+                            {% csrf_token %}
+                            <div class="row g-4">
+                                <!-- Left Column -->
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-4">
+                                        {{ form.name|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_name"><i class="fas fa-user"></i> Full
+                                            Name</label>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        {{ form.loginid|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_loginid"><i class="fas fa-id-badge"></i>
+                                            Login ID</label>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        {{ form.password|add_class:"form-control custom-input password-input" }}
+                                        <label class="form-label-icon" for="id_password"><i class="fas fa-lock"></i>
+                                            Password</label>
+                                        <span class="toggle-password"><i class="fas fa-eye"></i></span>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        {{ form.mobile|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_mobile"><i class="fas fa-phone"></i>
+                                            Mobile</label>
+                                    </div>
+                                </div>
+
+                                <!-- Right Column -->
+                                <div class="col-md-6">
+                                    <div class="position-relative mb-4">
+                                        {{ form.email|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_email"><i class="fas fa-envelope"></i>
+                                            Email</label>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        {{ form.locality|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_locality"><i class="fas fa-map-pin"></i>
+                                            Locality</label>
+                                    </div>
+
+                                    <div class="position-relative mb-4">
+                                        {{ form.address|add_class:"form-control custom-input" }}
+                                        <label class="form-label-icon" for="id_address"><i class="fas fa-home"></i>
+                                            Address</label>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="position-relative mb-4">
+                                                {{ form.city|add_class:"form-control custom-input" }}
+                                                <label class="form-label-icon" for="id_city"><i class="fas fa-city"></i>
+                                                    City</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative mb-4">
+                                                {{ form.state|add_class:"form-control custom-input" }}
+                                                <label class="form-label-icon" for="id_state"><i
+                                                        class="fas fa-flag"></i> State</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form.status }}
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
+                                    <i class="fas fa-paper-plane me-2"></i>     Sign Up
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-4 pt-3 border-top">
+                                <small>Already have an account? <a href="{% url 'UserLogin' %}"
+                                        class="fw-bold text-primary text-decoration-none">     Sign in</a></small>
+                            </div>
+
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-4" role="alert">
+                                <i
+                                    class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-triangle{% endif %} me-2"></i>
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Style -->
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #4e73df, #224abe);
+    }
+
+    .d-grid button {
+        margin-left: 25px;
+        width: 90%;
+    }
+
+    .login-card,
+    .registration-card {
+        border-radius: 30px !important;
+        overflow: hidden;
+        background-color: #fff;
+    }
+
+    .form-label-icon {
+        position: absolute;
+        top: -0.8rem;
+        left: 0.75rem;
+        background: #fff;
+        padding: 0 0.5rem;
+        font-size: 0.85rem;
+        color: #495057;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .custom-input {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        padding: 0.8rem 1.25rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        transition: all 0.3s ease;
+    }
+
+    .custom-input:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+
+    .position-relative .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #6c757d;
+    }
+</style>
+
+<!-- JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        AOS.init();
+
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const input = this.closest('.position-relative').querySelector('input');
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

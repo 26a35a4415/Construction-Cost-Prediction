@@ -1,0 +1,36 @@
+{% extends 'users/userbase.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome, {{ request.session.loggeduser }}!</h1>
+                <p class="lead">Machine Learning Project Dashboard</p>
+                <hr class="my-4">
+                <p>Use the navigation menu to access different features of the application.</p>
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Analytics Dashboard</h5>
+                                <p class="card-text">View performance metrics and comparisons of different machine learning algorithms.</p>
+                                <a href="{% url 'analytics' %}" class="btn btn-primary">Go to Analytics</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Prediction Tool</h5>
+                                <p class="card-text">Make predictions using our trained machine learning model.</p>
+                                <a href="{% url 'predection' %}" class="btn btn-primary">Make Prediction</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

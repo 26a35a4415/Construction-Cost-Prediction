@@ -1,0 +1,153 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    /* Custom Styles for Admin Panel Overview */
+    .admin-overview-section {
+        background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background */
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .admin-overview-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1); /* Subtle overlay for texture */
+        z-index: 0;
+    }
+
+    .overview-container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .overview-heading {
+        background-color: rgba(0, 0, 0, 0.7); /* Dark background for heading */
+        color: white !important;
+        padding: 15px 30px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+    }
+
+    .overview-card {
+        background: rgba(255, 255, 255, 0.95); /* Semi-transparent white card */
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        padding: 40px;
+    }
+
+    .overview-card-title {
+        color: #007bff; /* Primary color for title */
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .overview-card-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: #007bff; /* Accent line under title */
+        border-radius: 3px;
+    }
+
+    .overview-card-icon {
+        font-size: 2.5rem;
+        color: #28a745; /* Success color for icons */
+        margin-right: 15px;
+        vertical-align: middle;
+    }
+
+    .overview-list-item {
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+    }
+
+    .overview-list-item:last-child {
+        border-bottom: none;
+    }
+
+    .overview-list-item i {
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .overview-description {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+</style>
+
+<section class="admin-overview-section">
+    <div class="container overview-container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold overview-heading">
+                Construction Cost Index Prediction<br><small class="fs-5 text-light fw-light">Admin Panel Overview</small>
+            </h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card overview-card">
+                    <div class="card-body">
+                        <h3 class="card-title overview-card-title">
+                            <i class="fas fa-user-shield me-2"></i>Admin Panel - Your Control Center
+                        </h3>
+                        <p class="overview-description lead text-muted">
+                            Welcome to your administrative dashboard! Here, you have the power to manage users, data, and monitor the system's performance. Take a look at the key functionalities:
+                        </p>
+                        <ul class="list-group list-group-flush mt-4 mb-4">
+                            <li class="list-group-item overview-list-item">
+                                <i class="fas fa-user-check text-success overview-card-icon"></i>
+                                <span class="fw-bold text-dark">User Management:</span> Activate or deactivate registered user accounts with ease.
+                            </li>
+                            <li class="list-group-item overview-list-item">
+                                <i class="fas fa-users text-info overview-card-icon"></i>
+                                <span class="fw-bold text-dark">User Monitoring:</span> Get a clear view of all registered users and their current statuses.
+                            </li>
+                            <li class="list-group-item overview-list-item">
+                                <i class="fas fa-database text-warning overview-card-icon"></i>
+                                <span class="fw-bold text-dark">Data Management:</span> Seamlessly load, inspect, and organize your crucial training and test datasets.
+                            </li>
+                            <li class="list-group-item overview-list-item">
+                                <i class="fas fa-chart-line text-primary overview-card-icon"></i>
+                                <span class="fw-bold text-dark">Forecasting Insights:</span> Access and review the predicted outcomes generated by our advanced machine learning models.
+                            </li>
+                        </ul>
+
+                        <div class="text-center mt-5">
+                            <p class="text-muted fst-italic">
+                                Leverage these tools to ensure the smooth operation and accuracy of the Construction Cost Index Prediction system.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-K5G+y7bG2FrlFXRShVcF+8Bl4gRCwx6+iYi1B6jRTs0s7WqQ+kZMG5KhcrxRAFtWAXOcNnb2HbeXQZ4V2gWjKg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock %}

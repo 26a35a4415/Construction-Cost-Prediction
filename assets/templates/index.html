@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #a8dadc, #457b9d);
+        padding: 120px 0;
+        text-align: center;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section h2 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-section .btn-primary {
+        background-color: #1d3557;
+        color: #f1faee;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .hero-section .btn-primary:hover {
+        background-color: #457b9d;
+    }
+
+    .wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url("{% static 'images/wave-white.svg' %}") repeat-x;
+        animation: wave 10s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        z-index: 1;
+        opacity: 0.7;
+    }
+
+    @keyframes wave {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    /* User Guide Section */
+    .user-guide-section {
+        padding: 80px 0;
+        background-color: #f1faee;
+        color: #1d3557;
+    }
+
+    .user-guide-section h3 {
+        font-size: 2.2rem;
+        font-weight: bold;
+        margin-bottom: 25px;
+        color: #457b9d;
+        text-align: center;
+    }
+
+    .user-guide-section p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+
+    .user-guide-section ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .user-guide-section li {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #a8dadc;
+    }
+
+    .user-guide-section li:last-child {
+        border-bottom: none;
+    }
+
+    .user-guide-section li i {
+        font-size: 1.5rem;
+        color: #2a9d8f;
+        margin-right: 20px;
+        width: 30px;
+        text-align: center;
+    }
+
+    /* Feature Showcase Section */
+    .feature-showcase {
+        padding: 80px 0;
+        background-color: #457b9d;
+        color: #f1faee;
+    }
+
+    .feature-showcase h2 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .feature-box {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-box i {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #a8dadc;
+    }
+
+    .feature-box h4 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .feature-box p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #2a9d8f, #e9c46a);
+        text-align: center;
+        color: #1d3557;
+    }
+
+    .cta-section h2 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-section .btn-secondary {
+        background-color: #f4a261;
+        color: #1d3557;
+        border: none;
+        padding: 15px 35px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta-section .btn-secondary:hover {
+        background-color: #e76f51;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="container">
+        <h2 class="animate__animated animate__fadeInDown">Unlock Construction Cost Insights</h2>
+        <p class="animate__animated animate__fadeInUp animate__delay-0-5s">Empowering users with machine learning-driven cost predictions for better planning and decision-making.</p>
+        <a href="#" class="btn btn-primary animate__animated animate__fadeInUp animate__delay-1s">Learn More</a>
+    </div>
+    <div class="wave"></div>
+</div>
+
+<section class="user-guide-section">
+    <div class="container">
+        <h3 class="animate__animated animate__fadeIn">Getting Started with Our Prediction Platform</h3>
+        <p class="animate__animated animate__fadeIn animate__delay-0-2s">
+            Welcome! Our platform provides you with powerful tools to predict construction costs using advanced machine learning techniques. Here's a simple guide to get you started:
+        </p>
+        <ul class="animate__animated animate__fadeIn animate__delay-0-4s">
+            <li><i class="fas fa-user-plus"></i><strong>Registration:</strong> First, you'll need to register. Provide a valid email and mobile number for important updates and communications.</li>
+            <li><i class="fas fa-user-check"></i><strong>Activation:</strong> Once registered, an administrator will activate your account, granting you full access to the system.</li>
+            <li><i class="fas fa-sign-in-alt"></i><strong>Login:</strong> After activation, you can securely log in to our platform using your registered credentials.</li>
+            <li><i class="fas fa-upload"></i><strong>Dataset Upload:</strong> You can upload your construction cost datasets. Ensure your data columns align with our system's requirements. For optimal performance, data should be in integer or float format.</li>
+            <li><i class="fas fa-database"></i><strong>Existing Data:</strong> We've included the Adacel Technologies Limited dataset as a sample for testing and exploration.</li>
+            <li><i class="fas fa-plus-circle"></i><strong>Add New Data:</strong> You have the flexibility to expand existing datasets by adding new entries directly through our Django application.</li>
+            <li><i class="fas fa-magic"></i><strong>Data Preparation:</strong> Click on the "Data Preparation" button to initiate the data cleaning process. Our system will handle preprocessing steps automatically.</li>
+            <li><i class="fas fa-chart-bar"></i><strong>Cleaned Data & Visualizations:</strong> After preparation, the cleaned dataset will be presented along with relevant and insightful graphs to help you understand the data.</li>
+        </ul>
+        <p class="animate__animated animate__fadeIn animate__delay-0-6s">
+            Explore the features and leverage the power of machine learning to gain valuable insights into construction cost predictions!
+        </p>
+    </div>
+</section>
+
+<section class="feature-showcase">
+    <div class="container">
+        <h2 class="animate__animated animate__fadeInDown">Key Features at Your Fingertips</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-0-2s">
+                <div class="feature-box">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Easy Data Upload</h4>
+                    <p>Seamlessly upload your construction cost data in compatible formats for analysis.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-0-4s">
+                <div class="feature-box">
+                    <i class="fas fa-broom"></i>
+                    <h4>Automated Data Cleaning</h4>
+                    <p>Our system automatically prepares your data, handling missing values and inconsistencies.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-0-6s">
+                <div class="feature-box">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Advanced Predictions</h4>
+                    <p>Leverage cutting-edge machine learning algorithms for accurate cost index forecasting.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-0-8s">
+                <div class="feature-box">
+                    <i class="fas fa-plus-square"></i>
+                    <h4>Data Augmentation</h4>
+                    <p>Effortlessly add new data points to your existing datasets for enhanced analysis.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="feature-box">
+                    <i class="fas fa-eye"></i>
+                    <h4>Visual Insights</h4>
+                    <p>Explore your cleaned data through interactive graphs and visualizations.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp animate__delay-1-2s">
+                <div class="feature-box">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Performance Metrics</h4>
+                    <p>Gain insights into the performance of the prediction models.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2 class="animate__animated animate__fadeInDown">Ready to Predict Your Construction Costs?</h2>
+        <p class="animate__animated animate__fadeInUp animate__delay-0-5s">Sign up today and start leveraging the power of machine learning for informed decision-making.</p>
+        <a href="{% url 'UserRegister' %}" class="btn btn-secondary animate__animated animate__fadeInUp animate__delay-1s">Get Started Now</a>
+    </div>
+</section>
+
+{% endblock %}

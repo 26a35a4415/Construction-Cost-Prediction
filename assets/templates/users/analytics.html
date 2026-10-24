@@ -1,0 +1,75 @@
+{% extends 'users/userbase.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Machine Learning Analytics</h2>
+            
+            <!-- Accuracy Comparison -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4>Algorithm Accuracy Comparison</h4>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/png;base64,{{ plots.accuracy_comparison }}" class="img-fluid">
+                </div>
+            </div>
+            
+            <!-- Algorithm Results -->
+            {% for name, metrics in results.items %}
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h4>{{ name }} Performance</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Metrics Table -->
+                        <div class="col-md-6">
+                            <h5>Performance Metrics</h5>
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Score (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Accuracy</td>
+                                        <td>{{ metrics.accuracy }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Precision</td>
+                                        <td>{{ metrics.precision }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recall</td>
+                                        <td>{{ metrics.recall }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>F1 Score</td>
+                                        <td>{{ metrics.f1 }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h5 class="mt-4">Metrics Radar Chart</h5>
+                            <img src="data:image/png;base64,{{ plots|get_item:name|lower|replace(' ', '_') }}_radar }}" 
+                                 class="img-fluid">
+                        </div>
+                        
+                        <!-- Confusion Matrix -->
+                        <div class="col-md-6">
+                            <h5>Confusion Matrix</h5>
+                            <img src="data:image/png;base64,{{ plots|get_item:name|lower|replace(' ', '_') }}_cm }}" 
+                                 class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

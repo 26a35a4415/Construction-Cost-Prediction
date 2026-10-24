@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<section class="login-section py-5" style="background: #eef2f7;">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-lg animate__animated animate__fadeIn" data-aos="fade-up">
+                    <!-- Header -->
+                    <div class="card-header text-white text-center py-4 bg-gradient rounded-top-4 position-relative">
+                        <h2 class="mb-1" style="font-weight: 700;">
+                            <i class="fas fa-sign-in-alt me-2"></i>User Login
+                        </h2>
+                        <p class="mb-0 small opacity-75">Access your Construction Cost Prediction account</p>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="card-body login-card shadow-lg border-0 p-4" style="background-color: #fff;">
+                        <form id="loginForm" action="{% url 'UserLoginCheck' %}" method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+
+                            <!-- Login ID -->
+                            <div class="form-group position-relative mb-4">
+                                <input type="text" class="form-control custom-input" id="loginid" name="loginid"
+                                    placeholder=" " required>
+                                <label class="form-label-icon" for="loginid">
+                                    <i class="fas fa-id-card"></i> Login ID
+                                </label>
+                                <div class="invalid-feedback">Please enter your login ID</div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group position-relative mb-4">
+                                <input type="password" class="form-control custom-input password-input" id="pswd"
+                                    name="pswd" placeholder=" " required minlength="8">
+                                <label class="form-label-icon" for="pswd">
+                                    <i class="fas fa-key"></i> Password
+                                </label>
+                                <span class="toggle-password" onclick="togglePassword()">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                                <div class="invalid-feedback">Please enter your password (min 8 characters)</div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                                </button>
+                            </div>
+
+                            <!-- Register -->
+                            <div class="text-center mt-4 pt-3 border-top">
+                                <small class="text-muted">Don't have an account?
+                                    <a href="{% url 'UserRegister' %}"
+                                        class="fw-bold text-primary text-decoration-none">
+                                        Register Here <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </small>
+                            </div>
+
+                            <!-- Messages -->
+                            {% if messages %}
+                            <div class="mt-4">
+                                {% for message in messages %}
+                                <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show
+                                    d-flex align-items-center rounded" role="alert">
+                                    <i class="fas {% if message.tags == 'success' %}fa-check-circle{% elif message.tags == 'error' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} me-2"></i>
+                                    <div>{{ message }}</div>
+                                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Style -->
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #4e73df, #224abe);
+        border-radius: 15px 15px 0 0;
+    }
+    .d-grid button{
+        margin-left: 25px;
+        width: 90%;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-input {
+        border-radius: 10px;
+        border: 1px solid #ced4da;
+        padding: 12px 15px;
+        background-color: rgba(255, 255, 255, 0.95);
+        transition: all 0.3s ease;
+    }
+
+    .custom-input:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+
+    .form-label-icon {
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        background: #fff;
+        padding: 0 5px;
+        font-size: 0.85rem;
+        color: #495057;
+        font-weight: 500;
+        z-index: 1;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #6c757d;
+        z-index: 2;
+    }
+
+    .toggle-password:hover {
+        color: #495057;
+    }
+
+    .btn-primary {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+    }
+
+    .alert {
+        border-radius: 10px;
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+    }
+
+    .invalid-feedback {
+        display: none;
+        color: #dc3545;
+        font-size: 0.875rem;
+    }
+
+    .was-validated .form-control:invalid ~ .invalid-feedback,
+    .was-validated .form-control:invalid ~ .invalid-tooltip {
+        display: block;
+    }
+</style>
+
+<!-- Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS animation
+    document.addEventListener('DOMContentLoaded', function () {
+        AOS.init();
+    });
+
+    // Toggle password visibility
+    function togglePassword() {
+        const passwordInput = document.getElementById('pswd');
+        const eyeIcon = document.querySelector('.toggle-password i');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    // Form validation
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        const form = this;
+        const loginid = document.getElementById('loginid');
+        const password = document.getElementById('pswd');
+        let isValid = true;
+
+        // Reset validation
+        form.classList.remove('was-validated');
+        loginid.classList.remove('is-invalid');
+        password.classList.remove('is-invalid');
+
+        // Validate login ID
+        if (!loginid.value.trim()) {
+            loginid.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate password
+        if (!password.value.trim() || password.value.length < 8) {
+            password.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+        }
+    });
+
+    // Clear validation on input
+    document.querySelectorAll('.custom-input').forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+        });
+    });
+</script>
+{% endblock %}

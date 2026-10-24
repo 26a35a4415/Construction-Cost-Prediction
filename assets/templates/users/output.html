@@ -1,0 +1,293 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+{% block contents %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+  
+  .result-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(1, 10, 67, 0.3)), 
+                 no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .result-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 3rem 4rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out, float 6s ease-in-out infinite;
+  }
+
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    transform: rotate(30deg);
+    z-index: -1;
+    animation: shine 8s infinite;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes shine {
+    0% { left: -100%; }
+    20%, 100% { left: 100%; }
+  }
+
+  .result-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: inline-block;
+  }
+
+  .result-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    border-radius: 4px;
+  }
+
+  .result-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(40, 255, 171, 0.3), rgba(0, 198, 255, 0.3));
+    border-radius: 15px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
+                inset 0 0 15px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .result-value::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: all 0.8s ease;
+  }
+
+  .result-value:hover::before {
+    left: 100%;
+  }
+
+  .currency {
+    font-size: 2rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    color: #4cc9f0;
+  }
+
+  .btn-back {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0, 114, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 1rem;
+  }
+
+  .btn-back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .btn-back:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 114, 255, 0.6);
+  }
+
+  .btn-back:hover::before {
+    opacity: 1;
+  }
+
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    animation: floatParticle linear infinite;
+  }
+
+  @keyframes floatParticle {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(20px);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .result-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .result-title {
+      font-size: 2rem;
+    }
+    
+    .result-value {
+      font-size: 2.5rem;
+      padding: 1rem 1.5rem;
+    }
+    
+    .btn-back {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="result-page">
+  <div class="result-container">
+    <div class="particles" id="particles"></div>
+    <div class="result-card">
+      <div class="result-title">Predicted Construction Cost</div>
+      <div class="result-value"><span class="currency">₹</span> {{ pred }}</div>
+      <form action="{% url 'pre' %}">
+        <button type="submit" class="btn-back">Go Back</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create floating particles
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 30;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random properties
+      const size = Math.random() * 5 + 3;
+      const posX = Math.random() * 100;
+      const delay = Math.random() * 15;
+      const duration = Math.random() * 15 + 10;
+      const opacity = Math.random() * 0.5 + 0.3;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}%`;
+      particle.style.bottom = `-${size}px`;
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      particle.style.opacity = opacity;
+      
+      particlesContainer.appendChild(particle);
+    }
+    
+    // Add celebration effect when prediction is shown
+    const resultValue = document.querySelector('.result-value');
+    setTimeout(() => {
+      resultValue.classList.add('celebrate');
+    }, 500);
+  });
+</script>
+
+{% endblock %}
